@@ -9,17 +9,38 @@ app.get('/', (req, res) => {
   res.send('Hello from App Engine!');
 });
 
-
+// ---------------- remove this block -------------------
 app.get('/submit', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/form.html'));
 });
+// ------------------------------------------------------
 
-
+// app.get('/submit/:season', (req, res) => {
 app.post('/submit', (req, res) => {
   console.log({
+    // name: req.params.season;
     name: req.body.season,
   });
 
+
+  /* seasons data:
+
+  seasons = [
+    ['Krobus: Winter 1', 'Linus: Winter 3', 'Caroline: Winter 7',
+      'Sebastian: Winter 10', 'Harvey: Winter 14', 'Wizard: Winter 17',
+      'Evelyn: Winter 20', 'Leah: Winter 23', 'Clint: Winter 26'],
+    ['Kent: Spring 4', 'Lewis: Spring 7', 'Vincent: Spring 10',
+      'Haley: Spring 14', 'Pam: Spring 18', 'Shane: Spring 20',
+      'Pierre: Spring 26', 'Emily: Day 27'],
+    ['Jas: Summer 4', 'Gus: Summer 8', 'Maru: Summer 10',
+      'Alex: Summer 13', 'Sam: Summer 17', 'Demetrius: Summer 19',
+      'Dwarf: Summer 22', 'Willy: Summer 24', 'Leo: Summer 26'],
+    ['Penny: Fall 2', 'Elliot: Fall 5', 'Jodi: Fall 11',
+      'Abigail: Fall 13', 'Sandy: Fall 15', 'Marnie: Fall 18',
+      'Robin: Fall 21', 'George: Fall 24']
+    ];
+    
+  */
   seasons = [
     ["12-21","12-22", "12-23","12-24", "12-25", "12-26", "12-27", "12-28", "12-29", "12-30", "12-31",
       "01-01", "01-02", "01-03", "01-04", "01-05", "01-06", "01-07", "01-08", "01-09", "01-10",
@@ -68,18 +89,36 @@ app.post('/submit', (req, res) => {
      "12-21"]
     ]
 
+
   let date = ""
+  // if (req.params.season) == "Fall"
   if (req.body.season == "Fall"){
+
+    // date = seasons[3];
     date = seasons[3][Math.floor(Math.random() * seasons[3].length)]
+
+    // if (req.params.season) == "Spring"
   }else if(req.body.season == "Spring"){
+
+    // date = seasons[1];
     date = seasons[1][Math.floor(Math.random() * seasons[1].length)]
+
+    // if (req.params.season) == "Summer"
   }else if(req.body.season == "Summer"){
+
+    // date = seasons[2];
     date = seasons[2][Math.floor(Math.random() * seasons[2].length)]
+
+    // if (req.params.season) == "Winter"
   }else if(req.body.season == "Winter"){
+
+    // date = seasons[0];
     date = seasons[0][Math.floor(Math.random() * seasons[0].length)]
   }else{
     console.log("That is not a valid option")
   }
+
+
   res.send(date)
 });
 
