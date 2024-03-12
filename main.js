@@ -98,8 +98,6 @@ app.get('/submit/:season', (req, res) => {
     date = seasons[0];
   }
   
-
-
   res.send(date)
 });
 
